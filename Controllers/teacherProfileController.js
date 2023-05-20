@@ -23,6 +23,7 @@ exports.teacherProfile= async (req, resp) => {
 
         const datasave = await data.save();
         resp.status(200).json(datasave);
+       
     });
 
 };
@@ -35,6 +36,7 @@ exports.teacherProfile= async (req, resp) => {
 // }
 
 exports.getTeacherInfo=async(req,resp)=>{
-    const data=await teacher.findById(req.params.id);
+    const data=await teacher.findById(req.params.id).populate('department_id', ['name']);
     resp.send(data);
+    console.log(data.department_id.name);
 }

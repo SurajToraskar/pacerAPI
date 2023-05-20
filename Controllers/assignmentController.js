@@ -44,3 +44,4 @@ exports.assignmentView = async (req, resp) => {
     const imagePath = data.file_path;
     resp.send(imagePath);
 }
+
