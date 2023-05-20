@@ -1,17 +1,19 @@
 const express=require('express');
 const router=express.Router();
 const Upload=require('../helpers/multer');
-const adminController=require('../Controllers/adminController');
+const teacherProfileController=require('../Controllers/teacherProfileController');
 
 
 router.post('/',async(req,resp)=>{
-    await adminController.teacherProfile(req,resp);
+    await teacherProfileController.teacherProfile(req,resp);
 })
+
+// router.get('/:id',async(req,resp)=>{
+//     await teacherProfileController.getTeacherImage(req,resp);
+// })
 
 router.get('/:id',async(req,resp)=>{
-    await adminController.getTeacherImage(req,resp);
+    await teacherProfileController.getTeacherInfo(req,resp);
 })
-
-
 
 module.exports=router;
