@@ -8,9 +8,9 @@ router.post('/',async(req,resp)=>{
     await teacherProfileController.teacherProfile(req,resp);
 })
 
-// router.get('/:id',async(req,resp)=>{
-//     await teacherProfileController.getTeacherImage(req,resp);
-// })
+router.get('',async(req,resp)=>{
+    await teacherProfileController.getTeacherAllInfo(req,resp);
+})
 
 router.get('/:id',async(req,resp)=>{
     await teacherProfileController.getTeacherInfo(req,resp);

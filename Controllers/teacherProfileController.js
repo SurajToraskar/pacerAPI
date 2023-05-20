@@ -40,3 +40,8 @@ exports.getTeacherInfo=async(req,resp)=>{
     resp.send(data);
     console.log(data.department_id.name);
 }
+
+exports.getTeacherAllInfo=async(req,resp)=>{
+    const data=await teacher.find().populate('department_id', ['name']);;
+    resp.send(data);
+}
