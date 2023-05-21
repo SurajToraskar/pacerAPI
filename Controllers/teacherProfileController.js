@@ -35,6 +35,7 @@ exports.teacherProfile= async (req, resp) => {
 //     resp.send(image_Path);
 // }
 
+
 exports.getTeacherInfo=async(req,resp)=>{
     const data=await teacher.findById(req.params.id).populate('department_id', ['name']);
     resp.send(data);
@@ -42,6 +43,29 @@ exports.getTeacherInfo=async(req,resp)=>{
 }
 
 exports.getTeacherAllInfo=async(req,resp)=>{
-    const data=await teacher.find().populate('department_id', ['name']);;
+    const data=await teacher.find().populate('department_id', ['name']);
     resp.send(data);
+}
+
+exports.deleteTeacherInfo=async(req,resp)=>{
+    const data = await teacher.findById(req.params.id);
+    const imageUrl = data.imagepath;
+    const urlArray = imageUrl.split('/');
+    const image = urlArray[urlArray.length - 1];
+    const imageName = image.split('.')[0];
+
+    teacher.deleteOne({ _id: req.params.id }).then(() => {
+        cloudinary.uploader.destroy(imageName, (error, result) => {
+            resp.send(result);
+        }).catch((error) => {
+            resp.send(error);
+        })
+    }).catch((error) => {
+        resp.send(error);
+    })
+}
+
+exports.updateTeacherInfo=async(req,resp)=>{
+    const data=await teacher.findByIdAndUpdate(req.params.id, req.body,)
+    resp.status(200).send(data);
 }

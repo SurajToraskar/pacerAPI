@@ -16,4 +16,13 @@ router.get('/:id',async(req,resp)=>{
     await teacherProfileController.getTeacherInfo(req,resp);
 })
 
+router.delete('/:id',async(req,resp)=>{
+    await teacherProfileController.deleteTeacherInfo(req,resp);
+})
+
+router.put('/:id',async(req,resp)=>{
+    await teacherProfileController.updateTeacherInfo(req,resp);
+})
+
+
 module.exports=router;

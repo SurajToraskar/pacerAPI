@@ -35,6 +35,9 @@ exports.QpaperDelete = async (req, resp) => {
         resp.send(error);
     })
 }
+
+
+
 exports.QpaperView = async (req, resp) => {
     const data = await questionPaper.findById(req.params.id);
     const imagePath = data.file_path;
