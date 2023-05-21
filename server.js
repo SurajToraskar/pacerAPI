@@ -9,6 +9,7 @@ const deptRoute=require("./routes/department.routes.js");
 const noticeRoute=require("./routes/notice.routes.js");
 const profileRoute=require('./routes/teacherProfile.routes.js');
 const feedbackRoute=require("./routes/feedback.routes.js");
+const studentProfileRoute=require("./routes/studentProfile.routes.js")
 const resultRoute=require("./routes/result.routes.js")
 const port=8000;
 const app=express();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use('/assignment',assignmentRoute);
 app.use('/teacherProfile',profileRoute);
+app.use('/studentProfile',studentProfileRoute);
 app.use('/qpaper',qpaperRoute);
 app.use('/notes',notesRoute);
 app.use('/dept',deptRoute);
