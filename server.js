@@ -9,8 +9,9 @@ const deptRoute=require("./routes/department.routes.js");
 const noticeRoute=require("./routes/notice.routes.js");
 const profileRoute=require('./routes/teacherProfile.routes.js');
 const feedbackRoute=require("./routes/feedback.routes.js");
-const studentProfileRoute=require("./routes/studentProfile.routes.js")
-const resultRoute=require("./routes/result.routes.js")
+const studentProfileRoute=require("./routes/studentProfile.routes.js");
+const timetableRoute=require("./routes/timetable.routes.js")
+const resultRoute=require("./routes/result.routes.js");
 const port=8000;
 const app=express();
 
@@ -31,6 +32,7 @@ app.use('/subject',subRoute);
 app.use('/notice',noticeRoute);
 app.use('/feedback',feedbackRoute);
 app.use('/result',resultRoute);
+app.use('/timetable',timetableRoute);
 
 
 app.listen(port,()=>{console.log(`Listening to port ${port} `)})
