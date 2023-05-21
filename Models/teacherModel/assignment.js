@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const assignmentSchema = new mongoose.Schema({
+    title:{
+        type:String,
+    },
+    instruction:{
+        type:String,
+    },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
         required: true,

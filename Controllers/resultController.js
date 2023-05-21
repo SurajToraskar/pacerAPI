@@ -1,12 +1,13 @@
-const assignment = require('../Models/teacherModel/assignment.js');
 const cloudinary = require('../helpers/cloudinaryUpload.js');
+const results=require("../Models/teacherModel/result.js")
 
-exports.assignmentUpload = async (req, resp) => {
-    const file = req.files.uploadassignment;
+
+exports.uploadResult = async (req, resp) => {
+    const file = req.files.uploadresult;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
-        const data = new assignment({
-            "title":req.body.title,
-            "instruction":req.body.instruction,
+        const data = new results({
+            "title": req.body.title,
+            "instruction": req.body.instruction,
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
             "file_path": result.url
@@ -19,17 +20,14 @@ exports.assignmentUpload = async (req, resp) => {
 
 }
 
-
-exports.assignmentDelete = async (req, resp) => {
-    const data = await assignment.findById(req.params.id);
-    console.log(req.params.id);
-    console.log(data);
+exports.deleteResult = async (req, resp) => {
+    const data = await results.findById(req.params.id);
     const imageUrl = data.file_path;
     const urlArray = imageUrl.split('/');
     const image = urlArray[urlArray.length - 1];
     const imageName = image.split('.')[0];
 
-    assignment.deleteOne({ _id: req.params.id }).then(() => {
+    results.deleteOne({ _id: req.params.id }).then(() => {
         cloudinary.uploader.destroy(imageName, (error, result) => {
             resp.send(result);
         }).catch((error) => {
@@ -40,10 +38,15 @@ exports.assignmentDelete = async (req, resp) => {
     })
 }
 
-exports.assignmentView = async (req, resp) => {
-    const data = await assignment.findById(req.params.id);
-    console.log(data);
+exports.viewResult = async (req, resp) => {
+    const data = await results.findById(req.params.id).populate('teacher_id', ['name']).populate('subject_id', ['name']);
     const imagePath = data.file_path;
     resp.send(imagePath);
+    console.log(data.teacher_id.name);
+    console.log(data.subject_id.name);
 }
 
+exports.viewAllResult=async(req,resp)=>{
+    const data=await results.find().populate('teacher_id', ['name']).populate('subject_id', ['name']);
+    resp.send(data);
+}

@@ -6,6 +6,8 @@ exports.notesUpload = async (req, resp) => {
     const file = req.files.uploadnote;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new notes({
+            "title": req.body.title,
+            "instruction": req.body.instruction,
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
             "file_path": result.url
@@ -37,7 +39,7 @@ exports.notesDelete = async (req, resp) => {
 }
 
 exports.notesView = async (req, resp) => {
-    const data = await notes.findById(req.params.id).populate('teacher_id',['name']).populate('subject_id',['name']);
+    const data = await notes.findById(req.params.id).populate('teacher_id', ['name']).populate('subject_id', ['name']);
     const imagePath = data.file_path;
     resp.send(imagePath);
     console.log(data.teacher_id.name);

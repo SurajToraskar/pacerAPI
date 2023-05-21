@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const notesSchema = new mongoose.Schema({
-    title: {
-        type: String,
+const resultSchema = new mongoose.Schema({
+    title:{
+        type:String,
     },
-    instruction: {
-        type: String,
+    instruction:{
+        type:String,
     },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
@@ -23,11 +23,11 @@ const notesSchema = new mongoose.Schema({
     },
     upload_date: {
         type: Date,
-        required: true,
+        required:true,
         default: Date.now
     }
 
 });
 
-const notesModel = mongoose.model('Notes', notesSchema);
-module.exports = notesModel;
+const resultModel=mongoose.model('results',resultSchema);
+module.exports=resultModel;
