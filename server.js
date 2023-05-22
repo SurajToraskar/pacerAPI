@@ -12,6 +12,10 @@ const feedbackRoute=require("./routes/feedback.routes.js");
 const studentProfileRoute=require("./routes/studentProfile.routes.js");
 const timetableRoute=require("./routes/timetable.routes.js")
 const resultRoute=require("./routes/result.routes.js");
+const syllabusRoute=require("./routes/syllabus.routes.js");
+const technicalEventsRoute=require("./routes/technicalEvents.routes.js");
+const nonTechnicalEventsRoute=require("./routes/nonTechnicalEvents.routes.js");
+const culturalEventsRoute=require("./routes/culturalEvents.routes.js");
 const port=8000;
 const app=express();
 
@@ -33,6 +37,10 @@ app.use('/notice',noticeRoute);
 app.use('/feedback',feedbackRoute);
 app.use('/result',resultRoute);
 app.use('/timetable',timetableRoute);
+app.use('/syllabus',syllabusRoute);
+app.use('/technicalEvents',technicalEventsRoute);
+app.use('/nonTechnicalEvents',nonTechnicalEventsRoute);
+app.use('/culturalEvents',culturalEventsRoute);
 
 
 app.listen(port,()=>{console.log(`Listening to port ${port} `)})
