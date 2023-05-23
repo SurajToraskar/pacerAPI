@@ -46,4 +46,16 @@ exports.notesView = async (req, resp) => {
     console.log(data.subject_id.name);
 }
 
+exports.notesViewAll = async (req, resp) => {
+    const data = await notes.find();
+    resp.send(data);
+}
 
+// exports.notesViewAllPdf = async (req, resp) => {
+//     const data = await notes.find();
+//     resp.send(data);
+//     const newData = data.map((element) => {
+//         return element.file_path;
+//     })
+//     resp.send(newData);
+// }
