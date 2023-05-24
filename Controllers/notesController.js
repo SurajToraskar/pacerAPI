@@ -8,12 +8,13 @@ exports.notesUpload = async (req, resp) => {
         const data = new notes({
             "title": req.body.title,
             "instruction": req.body.instruction,
+            "year_id":req.params.id,
             "teacher_id": req.body.teacher_id,
-            "subject_id": req.body.subject_id,
             "file_path": result.url
 
         })
         console.log(result)
+        console.log(data.year_id);
         const dataSaved = await data.save();
         resp.status(200).json(dataSaved);
     })
@@ -39,11 +40,12 @@ exports.notesDelete = async (req, resp) => {
 }
 
 exports.notesView = async (req, resp) => {
-    const data = await notes.findById(req.params.id).populate('teacher_id', ['name']).populate('subject_id', ['name']);
-    const imagePath = data.file_path;
-    resp.send(imagePath);
-    console.log(data.teacher_id.name);
-    console.log(data.subject_id.name);
+    const data = await notes.find({year_id:req.params.id}).populate('year_id',['name']).populate('teacher_id', ['name']);
+    resp.send(data);
+    // const imagePath = data.file_path;
+    // resp.send(imagePath);
+    // console.log(data.teacher_id.name);
+    // console.log(data.subject_id.name);
 }
 
 exports.notesViewAll = async (req, resp) => {

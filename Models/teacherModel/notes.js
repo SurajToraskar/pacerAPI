@@ -7,16 +7,22 @@ const notesSchema = new mongoose.Schema({
     instruction: {
         type: String,
     },
+    year_id:{
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: "academicyears"
+
+    },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: "teacherdetails"
     },
-    subject_id: {
-        type: mongoose.Schema.ObjectId,
-        required: true,
-        ref: "subjects"
-    },
+    // subject_id: {
+    //     type: mongoose.Schema.ObjectId,
+    //     required: true,
+    //     ref: "subjects"
+    // },
     file_path: {
         type: String,
         required: true

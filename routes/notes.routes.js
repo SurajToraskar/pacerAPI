@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../helpers/multer');
 const notesController = require('../Controllers/notesController');
 
-router.post('/', async (req, resp) => {
+router.post('/:id', async (req, resp) => {
     await notesController.notesUpload(req, resp);
 })
 
