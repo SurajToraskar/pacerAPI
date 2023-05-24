@@ -3,6 +3,7 @@ const cloudinary = require('../helpers/cloudinaryUpload.js')
 
 
 exports.notesUpload = async (req, resp) => {
+    console.log(req.params.id);
     const file = req.files.uploadnote;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new notes({
@@ -40,7 +41,7 @@ exports.notesDelete = async (req, resp) => {
 }
 
 exports.notesView = async (req, resp) => {
-    const data = await notes.find({year_id:req.params.id}).populate('year_id',['name']).populate('teacher_id', ['name']);
+    const data = await notes.find({year_id:req.params.id}).populate('year_id',['year']).populate('teacher_id', ['name']);
     resp.send(data);
     // const imagePath = data.file_path;
     // resp.send(imagePath);
