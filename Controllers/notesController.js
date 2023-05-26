@@ -42,7 +42,11 @@ exports.notesDelete = async (req, resp) => {
 
 exports.notesView = async (req, resp) => {
     const data = await notes.find({year_id:req.params.id}).populate('year_id',['year']).populate('teacher_id', ['name']);
-    resp.send(data);
+    const newData=data.map((element,index,array)=>{
+        return element.file_path
+    })
+    resp.send(newData);
+    // resp.send(data);
     // const imagePath = data.file_path;
     // resp.send(imagePath);
     // console.log(data.teacher_id.name);
