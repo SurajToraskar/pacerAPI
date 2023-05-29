@@ -5,10 +5,11 @@ exports.assignmentUpload = async (req, resp) => {
     const file = req.files.uploadassignment;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new assignment({
-            "title":req.body.title,
-            "instruction":req.body.instruction,
+            "title": req.body.title,
+            "instruction": req.body.instruction,
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
+            "year_id": req.body.year_id,
             "file_path": result.url
 
         })
@@ -40,10 +41,22 @@ exports.assignmentDelete = async (req, resp) => {
     })
 }
 
-exports.assignmentView = async (req, resp) => {
+exports.viewSingleAssignment = async (req, resp) => {
     const data = await assignment.findById(req.params.id);
     console.log(data);
     const imagePath = data.file_path;
     resp.send(imagePath);
 }
 
+exports.viewAssignment = async (req, resp) => {
+    const data = await assignment.find();
+    resp.send(data);
+}
+
+exports.viewAssignmentLink = async (req, resp) => {
+    const data = await assignment.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.file_path
+    })
+    resp.send(newData);
+}

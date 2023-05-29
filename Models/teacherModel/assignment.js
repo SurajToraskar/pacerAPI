@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
 
 const assignmentSchema = new mongoose.Schema({
-    title:{
-        type:String,
+    title: {
+        type: String,
     },
-    instruction:{
-        type:String,
+    instruction: {
+        type: String,
     },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "teacherdetails"
     },
     subject_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "subjects"
+    },
+    year_id: {
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: "academicyears"
     },
     file_path: {
         type: String,
@@ -23,11 +28,11 @@ const assignmentSchema = new mongoose.Schema({
     },
     upload_date: {
         type: Date,
-        required:true,
+        required: true,
         default: Date.now
     }
 
 });
 
-const assignmentModel=mongoose.model('assignments',assignmentSchema);
-module.exports=assignmentModel;
+const assignmentModel = mongoose.model('assignments', assignmentSchema);
+module.exports = assignmentModel;
