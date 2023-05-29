@@ -58,6 +58,11 @@ exports.notesViewAll = async (req, resp) => {
     resp.send(data);
 }
 
+exports.viewSingleNote=async(req,resp)=>{
+    const data=await notes.findById(req.params.id);
+    resp.send(data.file_path);
+}
+
 // exports.notesViewAllPdf = async (req, resp) => {
 //     const data = await notes.find();
 //     resp.send(data);

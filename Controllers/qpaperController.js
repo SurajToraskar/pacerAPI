@@ -8,6 +8,7 @@ exports.QpaperUpload = async (req, resp) => {
         const data = new questionPaper({
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
+            "year_id": req.body.year_id,
             "file_path": result.url
 
         })
@@ -36,10 +37,24 @@ exports.QpaperDelete = async (req, resp) => {
     })
 }
 
+exports.viewQpaper = async (req, resp) => {
+    const data = await questionPaper.find().populate('teacher_id',['name']).populate('subject_id',['name']).populate('year_id',['year']);
+    resp.send(data);
+}
 
 
-exports.QpaperView = async (req, resp) => {
+
+exports.viewSingleQpaper = async (req, resp) => {
     const data = await questionPaper.findById(req.params.id);
     const imagePath = data.file_path;
     resp.send(imagePath);
+}
+
+exports.viewQpaperLink = async (req, resp) => {
+    const data = await questionPaper.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.file_path
+    })
+    resp.send(newData);
+
 }
