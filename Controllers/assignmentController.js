@@ -49,7 +49,7 @@ exports.viewSingleAssignment = async (req, resp) => {
 }
 
 exports.viewAssignment = async (req, resp) => {
-    const data = await assignment.find();
+    const data = await assignment.find().populate('year_id',['year']);
     resp.send(data);
 }
 

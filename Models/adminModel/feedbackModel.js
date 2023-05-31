@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
+    year_id: {
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: "academicyears"
+    },
     title: {
         type: String,
 

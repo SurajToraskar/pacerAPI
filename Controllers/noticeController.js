@@ -5,6 +5,7 @@ exports.noticeUpload=async(req,resp)=>{
     const file = req.files.uploadnotice;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new notice({
+            "year_id": req.body.year_id,
             "title": req.body.title,
             "message": req.body.message,
             "filepath": result.url
@@ -35,8 +36,22 @@ exports.noticeDelete = async (req, resp) => {
     })
 }
 
-exports.noticeView = async (req, resp) => {
-    const data = await notice.findById(req.params.id);
+exports.viewSingleNotice = async (req, resp) => {
+    const data = await notice.findById(req.params.id).populate('year_id',['year']);
     const imagePath = data.filepath;
     resp.send(imagePath);
+}
+
+exports.viewAllNotice=async(req,resp)=>{
+    const data = await notice.find().populate('year_id',['year']);
+    resp.status(200).json(data);
+}
+
+exports.viewNoticeLinks=async(req,resp)=>{
+    const data=await notice.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.filepath
+    })
+    resp.send(newData);
+
 }

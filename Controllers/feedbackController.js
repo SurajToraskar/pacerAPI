@@ -3,6 +3,7 @@ const feedback = require('../Models/adminModel/feedbackModel');
 
 exports.feedbackUpload = async (req, resp) => {
     const feedbackData = new feedback({
+        "year_id": req.body.year_id,
         "title":req.body.title,
         "description":req.body.description,
         "link": req.body.link
@@ -23,7 +24,15 @@ exports.feedbackView=async(req,resp)=>{
 }
 
 exports.feedbackViewAll=async(req,resp)=>{
-    const feedbackData=await feedback.find();
+    const feedbackData=await feedback.find().populate('year_id',['year']);
     resp.status(200).json(feedbackData);
 
 }
+exports.feedbackLinks=async(req,resp)=>{
+    const feedbackData=await feedback.find({ year_id: req.params.id });
+    const newData = feedbackData.map((element, index, array) => {
+        return element.link
+    })
+    resp.send(newData);
+}
+

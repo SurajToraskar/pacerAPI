@@ -6,6 +6,7 @@ exports.uploadResult = async (req, resp) => {
     const file = req.files.uploadresult;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new results({
+            "year_id": req.body.year_id,
             "title": req.body.title,
             "instruction": req.body.instruction,
             "teacher_id": req.body.teacher_id,
@@ -38,15 +39,22 @@ exports.deleteResult = async (req, resp) => {
     })
 }
 
-exports.viewResult = async (req, resp) => {
+exports.viewSingleResult = async (req, resp) => {
     const data = await results.findById(req.params.id).populate('teacher_id', ['name']).populate('subject_id', ['name']);
     const imagePath = data.file_path;
     resp.send(imagePath);
-    console.log(data.teacher_id.name);
-    console.log(data.subject_id.name);
+    
 }
 
 exports.viewAllResult=async(req,resp)=>{
-    const data=await results.find().populate('teacher_id', ['name']).populate('subject_id', ['name']);
+    const data=await results.find().populate('year_id',['year']).populate('teacher_id', ['name']).populate('subject_id', ['name']);
     resp.send(data);
+}
+
+exports.viewResultLinks=async(req,resp)=>{
+    const data=await results.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.file_path
+    })
+    resp.send(newData);
 }

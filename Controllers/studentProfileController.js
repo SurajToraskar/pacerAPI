@@ -5,7 +5,6 @@ const student=require("../Models/adminModel/studentModel.js")
 exports.studentProfile = async (req,res) => {
     console.log("student")
     const file = req.files.photo;
-    
     cloudinary.uploader.upload(file.tempFilePath,(err,result) => {
         const data = new student(
             {
