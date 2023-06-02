@@ -1,14 +1,13 @@
-const cloudinary=require('../helpers/cloudinaryUpload.js')
-const student=require("../Models/adminModel/studentModel.js")
+const cloudinary = require('../helpers/cloudinaryUpload.js')
+const student = require("../Models/adminModel/studentModel.js")
 
 
-exports.studentProfile = async (req,res) => {
-    console.log("student")
+exports.studentProfile = async (req, resp) => {
     const file = req.files.photo;
-    cloudinary.uploader.upload(file.tempFilePath,(err,result) => {
+    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
         const data = new student(
             {
-                "year_id":req.body.year_id,
+                "year_id": req.body.year_id,
                 "name": req.body.name,
                 "phoneno": req.body.phoneno,
                 "gender": req.body.gender,
@@ -24,26 +23,31 @@ exports.studentProfile = async (req,res) => {
             })
 
         const datasave = data.save();
-        res.status(200).json(datasave);
+        resp.status(200).send("student Info Add")
+        // resp.send(datasave);
     });
 };
 
 //get all students 
-exports.getStudentImages=async(req,resp)=>{
-
-    const data=await student.find()
+exports.getAllStudents = async (req, resp) => {
+    const data = await student.find().populate('year_id',['year']).populate('department_id',['name']);
     console.log(data);
     resp.send(data);
 };
 
 
 //get student
-exports.getStudentImage=async(req,resp)=>{
+exports.getSingleStudent = async (req, resp) => {
 
-    const data=await student.findById(req.params.id)
+    const data = await student.findById(req.params.id).populate('year_id',['year']).populate('department_id',['name']);
     console.log(data);
     resp.send(data);
 };
+
+exports.getStudentYearwise = async (req, resp) => {
+    const data = await student.find({ year_id: req.params.id }).populate('year_id',['year']).populate('department_id',['name']);
+    resp.send(data);
+}
 
 // //update student
 // exports.updateStudentImage=async(req,resp)=>{
@@ -54,9 +58,9 @@ exports.getStudentImage=async(req,resp)=>{
 // };
 
 //delete student 
-exports.deleteStudentImage=async(req,resp)=>{
+exports.deleteStudentImage = async (req, resp) => {
 
-    const data=await student.findByIdAndDelete(req.params.id)
+    const data = await student.findByIdAndDelete(req.params.id)
     console.log(data);
     resp.send(data);
 };
