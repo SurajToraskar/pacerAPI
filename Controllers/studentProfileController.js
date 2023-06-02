@@ -8,6 +8,7 @@ exports.studentProfile = async (req,res) => {
     cloudinary.uploader.upload(file.tempFilePath,(err,result) => {
         const data = new student(
             {
+                "year_id":req.body.year_id,
                 "name": req.body.name,
                 "phoneno": req.body.phoneno,
                 "gender": req.body.gender,

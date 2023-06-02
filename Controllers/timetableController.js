@@ -6,6 +6,7 @@ exports.timetableUpload = async (req, resp) => {
     const file = req.files.uploadtimetable;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new timetable({
+            "year_id": req.body.year_id,
             "link": result.url
 
         })
@@ -41,6 +42,14 @@ exports.timetableView = async (req, resp) => {
 }
 
 exports.timetableViewAll = async (req, resp) => {
-    const data = await timetable.find();
+    const data = await timetable.find().populate('year_id', ['year']);
     resp.send(data);
+}
+
+exports.timetableLinks = async (req, resp) => {
+    const data = await timetable.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.link;
+    })
+    resp.send(newData);
 }

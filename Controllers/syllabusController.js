@@ -1,13 +1,15 @@
 const cloudinary = require('../helpers/cloudinaryUpload.js');
-const syllabus=require('../Models/teacherModel/syllabus.js');
+const syllabus = require('../Models/teacherModel/syllabus.js');
 
 
 exports.syllabusUpload = async (req, resp) => {
     const file = req.files.uploadsyllabus;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new syllabus({
+            "year_id": req.body.year_id,
             "title": req.body.title,
             "instruction": req.body.instruction,
+            "subject_id":req.body.subject_id,
             "file_path": result.url
 
         })
@@ -43,7 +45,16 @@ exports.syllabusView = async (req, resp) => {
 }
 
 exports.syllabusViewAll = async (req, resp) => {
-    const data = await syllabus.find();
+    const data = await syllabus.find().populate('year_id', ['year']);
     resp.send(data);
+}
+
+exports.syllabusLinks = async (req, resp) => {
+    const data = await syllabus.find({ year_id: req.params.id });
+    const newData = data.map((element, index, array) => {
+        return element.file_path;
+    })
+    resp.send(newData);
+
 }
 

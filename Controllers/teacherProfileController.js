@@ -1,12 +1,13 @@
-const teacher=require('../Models/adminModel/teacherProfile');
-const cloudinary=require('../helpers/cloudinaryUpload.js');
+const teacher = require('../Models/adminModel/teacherProfile');
+const cloudinary = require('../helpers/cloudinaryUpload.js');
 
 
-exports.teacherProfile= async (req, resp) => {
+exports.teacherProfile = async (req, resp) => {
     const file = req.files.profilepic;
     cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
         const data = new teacher(
             {
+                "year_id": req.body.year_id,
                 "name": req.body.name,
                 "phoneno": req.body.phoneno,
                 "gender": req.body.gender,
@@ -23,7 +24,7 @@ exports.teacherProfile= async (req, resp) => {
 
         const datasave = await data.save();
         resp.status(200).json(datasave);
-       
+
     });
 
 };
@@ -36,18 +37,23 @@ exports.teacherProfile= async (req, resp) => {
 // }
 
 
-exports.getTeacherInfo=async(req,resp)=>{
-    const data=await teacher.findById(req.params.id).populate('department_id', ['name']);
+exports.getTeacherInfo = async (req, resp) => {
+    const data = await teacher.findById(req.params.id).populate('year_id', ['year']).populate('department_id', ['name']);
     resp.send(data);
-    console.log(data.department_id.name);
+    // console.log(data.department_id.name);
 }
 
-exports.getTeacherAllInfo=async(req,resp)=>{
-    const data=await teacher.find().populate('department_id', ['name']);
+exports.getTeacherAllInfo = async (req, resp) => {
+    const data = await teacher.find().populate('year_id', ['year']).populate('department_id', ['name']);
     resp.send(data);
 }
 
-exports.deleteTeacherInfo=async(req,resp)=>{
+exports.getYearwiseTeacherInfo=async(req,resp)=>{
+    const data = await teacher.find({ year_id: req.params.id }).populate('year_id', ['year']).populate('department_id', ['name']);
+    resp.send(data);
+}
+
+exports.deleteTeacherInfo = async (req, resp) => {
     const data = await teacher.findById(req.params.id);
     const imageUrl = data.imagepath;
     const urlArray = imageUrl.split('/');
@@ -65,7 +71,7 @@ exports.deleteTeacherInfo=async(req,resp)=>{
     })
 }
 
-exports.updateTeacherInfo=async(req,resp)=>{
-    const data=await teacher.findByIdAndUpdate(req.params.id, req.body,)
+exports.updateTeacherInfo = async (req, resp) => {
+    const data = await teacher.findByIdAndUpdate(req.params.id, req.body,)
     resp.status(200).send(data);
 }
