@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const resultSchema = new mongoose.Schema({
     year_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "academicyears"
     },
     title:{
@@ -14,12 +14,12 @@ const resultSchema = new mongoose.Schema({
     },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "teacherdetails"
     },
     subject_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "subjects"
     },
     file_path: {

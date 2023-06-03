@@ -19,7 +19,7 @@ const assignmentSchema = new mongoose.Schema({
     },
     year_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "academicyears"
     },
     file_path: {
