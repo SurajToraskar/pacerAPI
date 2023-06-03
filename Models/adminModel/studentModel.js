@@ -6,9 +6,8 @@ const schema = new mongoose.Schema({
       //  required: true
     },
     phoneno: {
-        type: Number,
-       // required: true,
-        unique: true
+      type: String,
+      // required: true,
     },
     gender: {
         type: String,
