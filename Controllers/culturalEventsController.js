@@ -48,6 +48,8 @@ exports.culturalEventView = async (req, resp) => {
 
 exports.culturalEventViewAll = async (req, resp) => {
     const data = await culturalEvents.find();
-    console.log(data);
-    resp.send(data);
+    const newData = data.map((element, index, array) => {
+        return element.link;
+    })
+    resp.send(newData);
 }

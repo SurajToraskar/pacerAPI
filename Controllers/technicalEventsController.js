@@ -48,6 +48,10 @@ exports.technicalEventView = async (req, resp) => {
 
 exports.technicalEventViewAll = async (req, resp) => {
     const data = await technicalEvents.find();
-    console.log(data);
-    resp.send(data);
+    const newData = data.map((element, index, array) => {
+        return element.link;
+    })
+    resp.send(newData);
+   
 }
+
