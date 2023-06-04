@@ -2,7 +2,7 @@ const studentdetails=require("../Models/adminModel/studentModel.js")
 const jwt = require('jsonwebtoken');
 const jwtSecretKey = 'YourSecretKey123';
 const accountSid = "AC73cae4f4eec552fda2c0922adcc25d35";
-const authToken = "a3405f4a389ff6bf1accd6f0b440b640";
+const authToken = "42d86b74a75e9aa08403b9fcb3d710c7";
 const verifySid = "VA1a918d1377ac54fb8e27cbaeeb8f7500";
 const client = require("twilio")(accountSid, authToken);
 
@@ -83,25 +83,3 @@ async function generateToken(phoneno) {
     throw new Error('An error occurred while generating token');
   }
 }
-
-
-
-exports.getStudent = async (req, res) => {
-    try {
-      const { phoneno, email } = req.body;
-  
-      const user = await studentdetails.findOne({ phoneno, email });
-      if (user) {
-        const { email, phoneno } = user;
-        res.json({ email, phoneno });
-      } else {
-        res.json({ message: 'User not found' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred while retrieving user data' });
-    }
-  };
-
-  
-  
