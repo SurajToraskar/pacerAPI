@@ -31,7 +31,7 @@ exports.feedbackViewAll=async(req,resp)=>{
 exports.feedbackLinks=async(req,resp)=>{
     const feedbackData=await feedback.find({ year_id: req.params.id });
     const newData = feedbackData.map((element, index, array) => {
-        return element.link
+        return { link: element.link, title: element.title };
     })
     resp.send(newData);
 }
