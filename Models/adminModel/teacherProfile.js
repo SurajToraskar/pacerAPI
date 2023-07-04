@@ -11,10 +11,10 @@ const schema = new mongoose.Schema({
         // required: true
     },
     phoneno: {
-        type: Number,
+        type: String,
         // required: true,
         unique: true
-    },
+      },
     gender: {
         type: String,
         // required: true

@@ -13,6 +13,4 @@ router.delete('/:id',async(req,resp)=>{
 router.get('',async(req,resp)=>{
     await academicYearController.viewAllAcademicYear(req,resp);
 })
-
-
 module.exports=router;
