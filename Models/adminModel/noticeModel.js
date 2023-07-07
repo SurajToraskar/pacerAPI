@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const noticeSchema = new mongoose.Schema({
     year_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+       // required: true,
         ref: "academicyears"
     },
     title: {
