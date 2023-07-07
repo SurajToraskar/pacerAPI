@@ -15,11 +15,11 @@ const noticeSchema = new mongoose.Schema({
     },
     filepath:{
         type:String,
-        required:true
+   //     required:true
     },
     upload_date: {
         type: Date,
-        required: true,
+       // required: true,
         default: Date.now
     }
 
