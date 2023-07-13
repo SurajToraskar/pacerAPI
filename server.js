@@ -18,6 +18,7 @@ const nonTechnicalEventsRoute = require("./routes/nonTechnicalEvents.routes.js")
 const culturalEventsRoute = require("./routes/culturalEvents.routes.js");
 const academicYearRoute = require("./routes/academicYears.routes.js");
 const authRoute = require("./routes/auth.route.js");
+const attendanceRoute = require("./routes/attendance.routes.js");
 const port = 8000;
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/nonTechnicalEvents', nonTechnicalEventsRoute);
 app.use('/culturalEvents', culturalEventsRoute);
 app.use('/academicYear', academicYearRoute);
 app.use('/auth', authRoute);
+app.use('/attendance',attendanceRoute);
 
 
 app.listen(port, () => { console.log(`Listening to port ${port} `) })

@@ -52,10 +52,22 @@ const schema = new mongoose.Schema({
   imagepath: {
     type: String,
     // required: true
-  }
-
-
-
+  },
+  //================================
+  //-------required for attendance--------------
+  averageAttendance: {
+    type: Number,
+    default: 0
+  },
+  totalClasses: {
+    type: Number,
+    default: 0
+  },
+  totalPresent: {
+    type: Number,
+    default: 0
+  },
+  //==============================
 })
 
 module.exports = mongoose.model('studentdetails', schema);

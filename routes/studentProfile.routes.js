@@ -23,4 +23,9 @@ router.get('/:id', reqFilter, async (req, resp) => {
 router.delete('/:id', async (req, resp) => {
     await studentProfileController.deleteStudentImage(req, resp);
 })
+
+router.put('/:id', async (req, resp) => {
+    await teacherProfileController.updateStudentInfo(req, resp);
+})
+
 module.exports = router;

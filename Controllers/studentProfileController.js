@@ -64,3 +64,8 @@ exports.deleteStudentImage = async (req, resp) => {
     console.log(data);
     resp.send(data);
 };
+
+exports.updateStudentInfo = async (req, resp) => {
+    const data = await student.findByIdAndUpdate(req.params.id, req.body,)
+    resp.status(200).send(data);
+}
