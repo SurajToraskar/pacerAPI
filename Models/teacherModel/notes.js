@@ -15,7 +15,7 @@ const notesSchema = new mongoose.Schema({
     },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
-        required: true,
+        // required: true,
         ref: "teacherdetails"
     },
     // subject_id: {
