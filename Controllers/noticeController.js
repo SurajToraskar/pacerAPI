@@ -5,7 +5,7 @@ exports.noticeUpload=async(req,resp)=>{
     const file = req.files.uploadnotice;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new notice({
-            "year_id": req.body.year_id,
+            "year_id":req.params.id,
             "title": req.body.title,
             "message": req.body.message,
             "filepath": result.url

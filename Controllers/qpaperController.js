@@ -8,7 +8,7 @@ exports.QpaperUpload = async (req, resp) => {
         const data = new questionPaper({
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
-            "year_id": req.body.year_id,
+            "year_id":req.params.id,
             "file_path": result.url
 
         })

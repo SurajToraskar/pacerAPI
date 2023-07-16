@@ -4,7 +4,7 @@ const feedbackController = require("../Controllers/feedbackController");
 const reqFilter = require('../middlewares/filterYear.middleware');
 
 
-router.post('/', async (req, resp) => {
+router.post('/:id',reqFilter, async (req, resp) => {
     await feedbackController.feedbackUpload(req, resp);
 })
 

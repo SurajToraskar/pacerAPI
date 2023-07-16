@@ -4,7 +4,7 @@ const syllabusController = require("../Controllers/syllabusController");
 const reqFilter = require('../middlewares/filterYear.middleware');
 
 
-router.post('/', async (req, resp) => {
+router.post('/:id',reqFilter, async (req, resp) => {
     await syllabusController.syllabusUpload(req, resp);
 })
 

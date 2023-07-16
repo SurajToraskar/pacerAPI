@@ -5,7 +5,7 @@ const assignmentController=require('../Controllers/assignmentController');
 const reqFilter=require('../middlewares/filterYear.middleware');
 
 
-router.post('/',async(req,resp)=>{
+router.post('/:id',reqFilter,async(req,resp)=>{
     await assignmentController.assignmentUpload(req,resp);
 })
 

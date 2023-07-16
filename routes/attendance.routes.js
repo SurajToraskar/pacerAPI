@@ -15,6 +15,9 @@ router.get("/downloadfile",async(req,resp)=>{
     await attendanceController.generateAttendanceList(req,resp);
 })
 
+router.get("/downloadAttendanceListAllStudents",async(req,resp)=>{
+    await attendanceController.generateAttendanceListAllStudents(req,resp);
+})
 
 
 module.exports = router;

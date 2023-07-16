@@ -6,7 +6,7 @@ exports.timetableUpload = async (req, resp) => {
     const file = req.files.uploadtimetable;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new timetable({
-            "year_id": req.body.year_id,
+            "year_id":req.params.id,
             "link": result.url
 
         })

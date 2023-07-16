@@ -4,7 +4,7 @@ const upload=require('../helpers/multer');
 const qpaperController=require('../Controllers/qpaperController');
 const reqFilter=require('../middlewares/filterYear.middleware');
 
-router.post('/',async(req,resp)=>{
+router.post('/:id',reqFilter,async(req,resp)=>{
     await qpaperController.QpaperUpload(req,resp);
 })
 

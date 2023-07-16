@@ -6,7 +6,7 @@ exports.syllabusUpload = async (req, resp) => {
     const file = req.files.uploadsyllabus;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new syllabus({
-            "year_id": req.body.year_id,
+            "year_id":req.params.id,
             "title": req.body.title,
             "instruction": req.body.instruction,
             "subject_id":req.body.subject_id,

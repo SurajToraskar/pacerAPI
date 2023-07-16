@@ -3,7 +3,7 @@ const router = express.Router();
 const noticeController = require("../Controllers/noticeController");
 const reqFilter = require('../middlewares/filterYear.middleware');
 
-router.post("/", async (req, resp) => {
+router.post("/:id", async (req, resp) => {
     await noticeController.noticeUpload(req, resp);
 })
 

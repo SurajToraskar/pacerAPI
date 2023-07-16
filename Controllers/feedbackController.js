@@ -3,7 +3,7 @@ const feedback = require('../Models/adminModel/feedbackModel');
 
 exports.feedbackUpload = async (req, resp) => {
     const feedbackData = new feedback({
-        "year_id": req.body.year_id,
+        "year_id":req.params.id,
         "title":req.body.title,
         "description":req.body.description,
         "link": req.body.link

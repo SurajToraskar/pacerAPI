@@ -3,7 +3,7 @@ const router=express.Router();
 const timetableController=require("../Controllers/timetableController");
 const reqFilter=require('../middlewares/filterYear.middleware');
 
-router.post('/',async(req,resp)=>{
+router.post('/:id',reqFilter,async(req,resp)=>{
     await timetableController.timetableUpload(req,resp);
 })
 

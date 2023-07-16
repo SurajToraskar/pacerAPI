@@ -6,7 +6,7 @@ exports.uploadResult = async (req, resp) => {
     const file = req.files.uploadresult;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new results({
-            "year_id": req.body.year_id,
+            "year_id":req.params.id,
             "title": req.body.title,
             "instruction": req.body.instruction,
             "teacher_id": req.body.teacher_id,
