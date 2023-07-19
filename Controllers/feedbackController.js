@@ -33,6 +33,6 @@ exports.feedbackLinks=async(req,resp)=>{
     const newData = feedbackData.map((element, index, array) => {
         return { link: element.link, title: element.title };
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 }
 

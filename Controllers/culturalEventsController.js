@@ -42,7 +42,7 @@ exports.culturalEventView = async (req, resp) => {
     const data = await culturalEvents.findById(req.params.id);
     console.log(data);
     const imagePath = data.link;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 
@@ -51,5 +51,5 @@ exports.culturalEventViewAll = async (req, resp) => {
     const newData = data.map((element, index, array) => {
         return element.link;
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 }

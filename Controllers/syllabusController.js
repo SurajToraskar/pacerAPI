@@ -41,12 +41,12 @@ exports.syllabusDelete = async (req, resp) => {
 exports.syllabusView = async (req, resp) => {
     const data = await syllabus.findById(req.params.id);
     const imagePath = data.file_path;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 exports.syllabusViewAll = async (req, resp) => {
     const data = await syllabus.find().populate('year_id', ['year']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.syllabusLinks = async (req, resp) => {
@@ -54,7 +54,7 @@ exports.syllabusLinks = async (req, resp) => {
     const newData = data.map((element, index, array) => {
         return element.file_path;
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 
 }
 

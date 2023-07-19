@@ -40,7 +40,7 @@ exports.QpaperDelete = async (req, resp) => {
 
 exports.viewQpaper = async (req, resp) => {
     const data = await questionPaper.find().populate('teacher_id',['name']).populate('subject_id',['name']).populate('year_id',['year']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 
@@ -48,7 +48,7 @@ exports.viewQpaper = async (req, resp) => {
 exports.viewSingleQpaper = async (req, resp) => {
     const data = await questionPaper.findById(req.params.id);
     const imagePath = data.file_path;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 exports.viewQpaperLink = async (req, resp) => {
@@ -56,6 +56,6 @@ exports.viewQpaperLink = async (req, resp) => {
     const newData = data.map((element, index, array) => {
         return element.file_path
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 
 }

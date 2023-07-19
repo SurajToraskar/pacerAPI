@@ -39,7 +39,7 @@ exports.noticeDelete = async (req, resp) => {
 exports.viewSingleNotice = async (req, resp) => {
     const data = await notice.findById(req.params.id).populate('year_id',['year']);
     const imagePath = data.filepath;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 exports.viewAllNotice=async(req,resp)=>{
@@ -52,6 +52,6 @@ exports.viewNoticeLinks=async(req,resp)=>{
     const newData = data.map((element, index, array) => {
         return element.filepath
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 
 }

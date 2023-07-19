@@ -38,12 +38,12 @@ exports.timetableDelete = async (req, resp) => {
 exports.timetableView = async (req, resp) => {
     const data = await timetable.findById(req.params.id);
     const imagePath = data.link;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 exports.timetableViewAll = async (req, resp) => {
     const data = await timetable.find().populate('year_id', ['year']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.timetableLinks = async (req, resp) => {
@@ -51,5 +51,5 @@ exports.timetableLinks = async (req, resp) => {
     const newData = data.map((element, index, array) => {
         return element.link;
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 }

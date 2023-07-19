@@ -42,13 +42,13 @@ exports.deleteResult = async (req, resp) => {
 exports.viewSingleResult = async (req, resp) => {
     const data = await results.findById(req.params.id).populate('teacher_id', ['name']).populate('subject_id', ['name']);
     const imagePath = data.file_path;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
     
 }
 
 exports.viewAllResult=async(req,resp)=>{
     const data=await results.find().populate('year_id',['year']).populate('teacher_id', ['name']).populate('subject_id', ['name']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.viewResultLinks=async(req,resp)=>{
@@ -56,5 +56,5 @@ exports.viewResultLinks=async(req,resp)=>{
     const newData = data.map((element, index, array) => {
         return element.file_path
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 }

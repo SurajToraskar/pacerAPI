@@ -45,7 +45,7 @@ exports.notesView = async (req, resp) => {
     const newData=data.map((element,index,array)=>{
         return element.file_path
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
     // resp.send(data);
     // const imagePath = data.file_path;
     // resp.send(imagePath);
@@ -55,12 +55,12 @@ exports.notesView = async (req, resp) => {
 
 exports.notesViewAll = async (req, resp) => {
     const data = await notes.find();
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.viewSingleNote=async(req,resp)=>{
     const data=await notes.findById(req.params.id);
-    resp.send(data.file_path);
+    resp.status(200).send(data.file_path);
 }
 
 // exports.notesViewAllPdf = async (req, resp) => {

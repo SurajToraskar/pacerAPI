@@ -32,7 +32,7 @@ exports.studentProfile = async (req, resp) => {
 exports.getAllStudents = async (req, resp) => {
     const data = await student.find().populate('year_id',['year']).populate('department_id',['name']);
     console.log(data);
-    resp.send(data);
+    resp.status(200).send(data);
 };
 
 
@@ -41,12 +41,12 @@ exports.getSingleStudent = async (req, resp) => {
 
     const data = await student.findById(req.params.id).populate('year_id',['year']).populate('department_id',['name']);
     console.log(data);
-    resp.send(data);
+    resp.status(200).send(data);
 };
 
 exports.getStudentYearwise = async (req, resp) => {
     const data = await student.find({ year_id: req.params.id }).populate('year_id',['year']).populate('department_id',['name']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 // //update student
@@ -62,7 +62,7 @@ exports.deleteStudentImage = async (req, resp) => {
 
     const data = await student.findByIdAndDelete(req.params.id)
     console.log(data);
-    resp.send(data);
+    resp.status(200).send(data);
 };
 
 exports.updateStudentInfo = async (req, resp) => {

@@ -45,12 +45,12 @@ exports.viewSingleAssignment = async (req, resp) => {
     const data = await assignment.findById(req.params.id);
     console.log(data);
     const imagePath = data.file_path;
-    resp.send(imagePath);
+    resp.status(200).send(imagePath);
 }
 
 exports.viewAssignment = async (req, resp) => {
     const data = await assignment.find().populate('year_id',['year']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.viewAssignmentLink = async (req, resp) => {
@@ -58,5 +58,5 @@ exports.viewAssignmentLink = async (req, resp) => {
     const newData = data.map((element, index, array) => {
         return element.file_path
     })
-    resp.send(newData);
+    resp.status(200).send(newData);
 }

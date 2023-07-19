@@ -39,18 +39,18 @@ exports.teacherProfile = async (req, resp) => {
 
 exports.getTeacherInfo = async (req, resp) => {
     const data = await teacher.findById(req.params.id).populate('year_id', ['year']).populate('department_id', ['name']);
-    resp.send(data);
+    resp.status(200).send(data);
     // console.log(data.department_id.name);
 }
 
 exports.getTeacherAllInfo = async (req, resp) => {
     const data = await teacher.find().populate('year_id', ['year']).populate('department_id', ['name']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.getYearwiseTeacherInfo=async(req,resp)=>{
     const data = await teacher.find({ year_id: req.params.id }).populate('year_id', ['year']).populate('department_id', ['name']);
-    resp.send(data);
+    resp.status(200).send(data);
 }
 
 exports.deleteTeacherInfo = async (req, resp) => {
