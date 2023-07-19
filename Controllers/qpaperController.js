@@ -6,6 +6,7 @@ exports.QpaperUpload = async (req, resp) => {
     const file = req.files.uploadqpaper;
     cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
         const data = new questionPaper({
+            "title": req.body.title,
             "teacher_id": req.body.teacher_id,
             "subject_id": req.body.subject_id,
             "year_id":req.params.id,

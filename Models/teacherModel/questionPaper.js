@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const QpaperSchema = new mongoose.Schema({
+    title: {
+        type: String,
+    },
     teacher_id: {
         type: mongoose.Schema.ObjectId,
         ref: "teacherdetails"
