@@ -47,11 +47,27 @@ exports.viewAllNotice=async(req,resp)=>{
     resp.status(200).json(data);
 }
 
-exports.viewNoticeLinks=async(req,resp)=>{
-    const data=await notice.find({ year_id: req.params.id });
-    const newData = data.map((element, index, array) => {
-        return element.filepath
-    })
-    resp.status(200).send(newData);
+// exports.viewNoticeLinks=async(req,resp)=>{
+//     const data=await notice.find({ year_id: req.params.id });
+//     const newData = data.map((element, index, array) => {
+//         return element.filepath
+//     })
+//     resp.status(200).send(newData);
 
-}
+// }
+
+exports.viewNoticeLinks = async (req, resp) => {
+    try {
+        const data = await notice.find({ year_id: req.params.id });
+        const newData = data.map((element) => {
+            return {
+                filepath: element.filepath,
+                title: element.title
+            };
+        });
+
+        resp.status(200).send(newData);
+    } catch (error) {
+        resp.status(500).send('Error fetching question papers');
+    }
+};

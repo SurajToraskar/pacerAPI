@@ -46,12 +46,27 @@ exports.technicalEventView = async (req, resp) => {
 }
 
 
-exports.technicalEventViewAll = async (req, resp) => {
-    const data = await technicalEvents.find();
-    const newData = data.map((element, index, array) => {
-        return element.link;
-    })
-    resp.status(200).send(newData);
+// exports.technicalEventViewAll = async (req, resp) => {
+//     const data = await technicalEvents.find();
+//     const newData = data.map((element, index, array) => {
+//         return element.link;
+//     })
+//     resp.status(200).send(newData);
    
-}
+// }
 
+exports.technicalEventViewAll = async (req, resp) => {
+    try {
+        const data = await technicalEvents.find();
+        const newData = data.map((element) => {
+            return {
+                link: element.link,
+                title: element.title
+            };
+        });
+
+        resp.status(200).send(newData);
+    } catch (error) {
+        resp.status(500).send('Error fetching question papers');
+    }
+};

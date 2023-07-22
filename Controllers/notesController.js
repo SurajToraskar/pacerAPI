@@ -40,18 +40,39 @@ exports.notesDelete = async (req, resp) => {
     })
 }
 
+// exports.notesView = async (req, resp) => {
+//     const data = await notes.find({year_id:req.params.id}).populate('year_id',['year']).populate('teacher_id', ['name']);
+//     const newData=data.map((element,index,array)=>{
+//         return element.file_path
+//     })
+//     resp.status(200).send(newData);
+//     // resp.send(data);
+//     // const imagePath = data.file_path;
+//     // resp.send(imagePath);
+//     // console.log(data.teacher_id.name);
+//     // console.log(data.subject_id.name);
+// }
+
+
 exports.notesView = async (req, resp) => {
-    const data = await notes.find({year_id:req.params.id}).populate('year_id',['year']).populate('teacher_id', ['name']);
-    const newData=data.map((element,index,array)=>{
-        return element.file_path
-    })
-    resp.status(200).send(newData);
-    // resp.send(data);
-    // const imagePath = data.file_path;
-    // resp.send(imagePath);
-    // console.log(data.teacher_id.name);
-    // console.log(data.subject_id.name);
-}
+    try {
+        const data = await notes.find({ year_id: req.params.id });
+        const newData = data.map((element) => {
+            return {
+                file_path: element.file_path,
+                title: element.title
+            };
+        });
+
+        resp.status(200).send(newData);
+    } catch (error) {
+        resp.status(500).send('Error fetching question papers');
+    }
+};
+
+
+
+
 
 exports.notesViewAll = async (req, resp) => {
     const data = await notes.find();
