@@ -51,11 +51,30 @@ exports.viewSingleQpaper = async (req, resp) => {
     resp.status(200).send(imagePath);
 }
 
-exports.viewQpaperLink = async (req, resp) => {
-    const data = await questionPaper.find({ year_id: req.params.id });
-    const newData = data.map((element, index, array) => {
-        return element.file_path
-    })
-    resp.status(200).send(newData);
+//Old code
+// exports.viewQpaperLink = async (req, resp) => {
+//     const data = await questionPaper.find({ year_id: req.params.id });
+//     const newData = data.map((element, index, array) => {
+//         return element.file_path
+//     })
+//     resp.status(200).send(newData);
 
-}
+// }
+
+
+//new code
+exports.viewQpaperLink = async (req, resp) => {
+    try {
+        const data = await questionPaper.find({ year_id: req.params.id });
+        const newData = data.map((element) => {
+            return {
+                file_path: element.file_path,
+                title: element.title
+            };
+        });
+
+        resp.status(200).send(newData);
+    } catch (error) {
+        resp.status(500).send('Error fetching question papers');
+    }
+};

@@ -6,6 +6,10 @@ const timetableSchema = new mongoose.Schema({
         required: true,
         ref: "academicyears"
     },
+    title: {
+        type: String,
+
+    },
     link: {
         type: String
     },
