@@ -8,7 +8,7 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await notesController.notesUpload(req, resp);
 })
 
-router.post('/',reqFilter, async (req, resp) => {
+router.post('/', async (req, resp) => {
     await notesController.notesUploadAll(req, resp);
 })
 

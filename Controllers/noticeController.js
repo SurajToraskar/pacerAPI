@@ -34,6 +34,7 @@ exports.noticeUploadAll=async(req,resp)=>{
         console.log(result);
         const dataSaved = await data.save();
         resp.status(200).json(dataSaved);
+        console.log("working");
     })
 }
 

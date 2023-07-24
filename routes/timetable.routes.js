@@ -7,7 +7,7 @@ router.post('/:id',reqFilter,async(req,resp)=>{
     await timetableController.timetableUpload(req,resp);
 })
 
-router.post('/',reqFilter,async(req,resp)=>{
+router.post('/',async(req,resp)=>{
     await timetableController.timetableUploadAll(req,resp);
 })
 

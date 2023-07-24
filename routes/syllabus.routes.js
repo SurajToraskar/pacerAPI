@@ -8,7 +8,7 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await syllabusController.syllabusUpload(req, resp);
 })
 
-router.post('/',reqFilter, async (req, resp) => {
+router.post('/', async (req, resp) => {
     await syllabusController.syllabusUploadAll(req, resp);
 })
 

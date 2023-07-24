@@ -9,7 +9,7 @@ router.post('/:id',reqFilter,async(req,resp)=>{
     await assignmentController.assignmentUpload(req,resp);
 })
 
-router.post('/',reqFilter,async(req,resp)=>{
+router.post('/',async(req,resp)=>{
     await assignmentController.assignmentUploadAll(req,resp);
 })
 

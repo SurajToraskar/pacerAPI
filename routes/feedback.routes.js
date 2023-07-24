@@ -8,7 +8,7 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await feedbackController.feedbackUpload(req, resp);
 })
 
-router.post('/',reqFilter, async (req, resp) => {
+router.post('/', async (req, resp) => {
     await feedbackController.feedbackUploadAll(req, resp);
 })
 
