@@ -20,6 +20,24 @@ exports.QpaperUpload = async (req, resp) => {
 
 }
 
+exports.QpaperUploadAll = async (req, resp) => {
+    const file = req.files.uploadqpaper;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new questionPaper({
+            "title": req.body.title,
+            "teacher_id": req.body.teacher_id,
+            "subject_id": req.body.subject_id,
+            "year_id":req.body.year_id,
+            "file_path": result.url
+
+        })
+        console.log(result);
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
+
 exports.QpaperDelete = async (req, resp) => {
     const data = await questionPaper.findById(req.params.id);
     const imageUrl = data.file_path;

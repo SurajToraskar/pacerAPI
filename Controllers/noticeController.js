@@ -18,6 +18,25 @@ exports.noticeUpload=async(req,resp)=>{
     })
 }
 
+
+
+exports.noticeUploadAll=async(req,resp)=>{
+    const file = req.files.uploadnotice;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new notice({
+            "year_id":req.body.year_id,
+            "title": req.body.title,
+            "message": req.body.message,
+            "filepath": result.url
+
+        })
+        console.log(data);
+        console.log(result);
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+}
+
 exports.noticeDelete = async (req, resp) => {
     const data = await notice.findById(req.params.id);
     const imageUrl = data.filepath;

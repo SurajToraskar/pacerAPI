@@ -8,6 +8,10 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await syllabusController.syllabusUpload(req, resp);
 })
 
+router.post('/',reqFilter, async (req, resp) => {
+    await syllabusController.syllabusUploadAll(req, resp);
+})
+
 router.delete('/:id', async (req, resp) => {
     await syllabusController.syllabusDelete(req, resp);
 })

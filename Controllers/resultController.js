@@ -21,6 +21,26 @@ exports.uploadResult = async (req, resp) => {
 
 }
 
+
+exports.uploadResultAll = async (req, resp) => {
+    const file = req.files.uploadresult;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new results({
+            "year_id":req.body.year_id,
+            "title": req.body.title,
+            "instruction": req.body.instruction,
+            "teacher_id": req.body.teacher_id,
+            "subject_id": req.body.subject_id,
+            "file_path": result.url
+
+        })
+        console.log(result)
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
+
 exports.deleteResult = async (req, resp) => {
     const data = await results.findById(req.params.id);
     const imageUrl = data.file_path;

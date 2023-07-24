@@ -20,6 +20,24 @@ exports.assignmentUpload = async (req, resp) => {
 
 }
 
+exports.assignmentUploadAll = async (req, resp) => {
+    const file = req.files.uploadassignment;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new assignment({
+            "title": req.body.title,
+            "instruction": req.body.instruction,
+            "teacher_id": req.body.teacher_id,
+            "subject_id": req.body.subject_id,
+            "year_id":req.body.year_id,
+            "file_path": result.url
+
+        })
+        console.log(result)
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
 
 exports.assignmentDelete = async (req, resp) => {
     const data = await assignment.findById(req.params.id);

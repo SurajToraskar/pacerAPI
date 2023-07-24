@@ -20,6 +20,23 @@ exports.syllabusUpload = async (req, resp) => {
 
 }
 
+exports.syllabusUploadAll = async (req, resp) => {
+    const file = req.files.uploadsyllabus;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new syllabus({
+            "year_id":req.body.year_id,
+            "title": req.body.title,
+            "instruction": req.body.instruction,
+            "subject_id":req.body.subject_id,
+            "file_path": result.url
+
+        })
+        console.log(result);
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
 exports.syllabusDelete = async (req, resp) => {
     const data = await syllabus.findById(req.params.id);
     const imageUrl = data.file_path;

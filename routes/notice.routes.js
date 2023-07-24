@@ -7,6 +7,12 @@ router.post("/:id", async (req, resp) => {
     await noticeController.noticeUpload(req, resp);
 })
 
+
+router.post("/", async (req, resp) => {
+    await noticeController.noticeUploadAll(req, resp);
+})
+
+
 router.delete('/:id', async (req, resp) => {
     await noticeController.noticeDelete(req, resp);
 })

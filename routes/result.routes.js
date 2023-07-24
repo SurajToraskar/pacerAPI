@@ -8,6 +8,11 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await resultController.uploadResult(req, resp);
 })
 
+router.post('/',reqFilter, async (req, resp) => {
+    await resultController.uploadResultAll(req, resp);
+})
+
+
 router.delete('/:id', async (req, resp) => {
     await resultController.deleteResult(req, resp);
 })

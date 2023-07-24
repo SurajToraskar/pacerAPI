@@ -22,6 +22,28 @@ exports.notesUpload = async (req, resp) => {
 
 }
 
+
+exports.notesUploadAll = async (req, resp) => {
+    console.log(req.params.id);
+    const file = req.files.uploadnote;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new notes({
+            "title": req.body.title,
+            "instruction": req.body.instruction,
+            "year_id":req.body.year_id,
+            "teacher_id": req.body.teacher_id,
+            "file_path": result.url
+
+        })
+        console.log(result)
+        console.log(data.year_id);
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
+
+
 exports.notesDelete = async (req, resp) => {
     const data = await notes.findById(req.params.id);
     const imageUrl = data.file_path;

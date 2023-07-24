@@ -8,6 +8,10 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await feedbackController.feedbackUpload(req, resp);
 })
 
+router.post('/',reqFilter, async (req, resp) => {
+    await feedbackController.feedbackUploadAll(req, resp);
+})
+
 router.delete('/:id', async (req, resp) => {
     await feedbackController.feedbackDelete(req, resp);
 })

@@ -8,6 +8,10 @@ router.post('/:id',reqFilter, async (req, resp) => {
     await notesController.notesUpload(req, resp);
 })
 
+router.post('/',reqFilter, async (req, resp) => {
+    await notesController.notesUploadAll(req, resp);
+})
+
 router.delete('/:id', async (req, resp) => {
     await notesController.notesDelete(req, resp);
 })

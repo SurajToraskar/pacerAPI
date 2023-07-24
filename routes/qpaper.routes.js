@@ -8,6 +8,10 @@ router.post('/:id',reqFilter,async(req,resp)=>{
     await qpaperController.QpaperUpload(req,resp);
 })
 
+router.post('/',reqFilter,async(req,resp)=>{
+    await qpaperController.QpaperUploadAll(req,resp);
+})
+
 router.delete('/:id',async(req,resp)=>{
     await qpaperController.QpaperDelete(req,resp);
 })

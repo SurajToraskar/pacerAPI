@@ -9,6 +9,10 @@ router.post('/:id',reqFilter,async(req,resp)=>{
     await assignmentController.assignmentUpload(req,resp);
 })
 
+router.post('/',reqFilter,async(req,resp)=>{
+    await assignmentController.assignmentUploadAll(req,resp);
+})
+
 router.delete('/:id',async(req,resp)=>{
     await assignmentController.assignmentDelete(req,resp);
 })

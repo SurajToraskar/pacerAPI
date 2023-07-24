@@ -18,6 +18,22 @@ exports.timetableUpload = async (req, resp) => {
 
 }
 
+exports.timetableUploadAll= async (req, resp) => {
+    const file = req.files.uploadtimetable;
+    cloudinary.uploader.upload(file.tempFilePath, async (error, result) => {
+        const data = new timetable({
+            "title":req.body.title,
+            "year_id":req.body.year_id,
+            "link": result.url
+
+        })
+        console.log(result);
+        const dataSaved = await data.save();
+        resp.status(200).json(dataSaved);
+    })
+
+}
+
 exports.timetableDelete = async (req, resp) => {
     const data = await timetable.findById(req.params.id);
     const imageUrl = data.link;

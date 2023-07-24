@@ -7,6 +7,11 @@ router.post('/:id',reqFilter,async(req,resp)=>{
     await timetableController.timetableUpload(req,resp);
 })
 
+router.post('/',reqFilter,async(req,resp)=>{
+    await timetableController.timetableUploadAll(req,resp);
+})
+
+
 router.delete('/:id',async(req,resp)=>{
     await timetableController.timetableDelete(req,resp);
 })
