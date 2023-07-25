@@ -3,9 +3,9 @@ const teacherdetails=require("../Models/adminModel/teacherProfile.js")
 const adminmodel=require("../Models/adminModel/admin.js")
 const jwt = require('jsonwebtoken');
 const jwtSecretKey = 'YourSecretKey123';
-const accountSid = "ACfe72440be3582687fc4fab39ddd77602";
-const authToken = "dfbbbcc5b76c6f10ab178c45c7b5320c";
-const verifySid = "VA9d1344c6738fb4217baa865210530981";
+const accountSid = "AC97cfeec1b2ee8b79e0af30ca2d92c406";
+const authToken = "b5e35a13f093d0038bb3488a0bff5c3a";
+const verifySid = "VA5f4517be11abfe2ebe73dffbc58e4510";
 const client = require("twilio")(accountSid, authToken);
 
 exports.sendOtp = async (req, res) => {
